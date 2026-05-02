@@ -1,12 +1,584 @@
-<!doctype html><html lang=en><head><meta charset=UTF-8><meta name=viewport content="width=device-width,initial-scale=1"><title>You're Paying a Huge Performance Tax on Your JSON Columns. Here's the One-Line Fix. - YOUSSEF JAD | THE DIGITAL PORTER</title><link rel=preconnect href=https://fonts.googleapis.com><link rel=preconnect href=https://fonts.gstatic.com crossorigin><link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Cinzel:wght@400;500;600;700&display=swap" rel=stylesheet><style>:root{--bg-color:#050608;--surface-color:rgba(15, 18, 25, 0.7);--surface-border:rgba(74, 107, 130, 0.3);--chiral-gold:#E5A93D;--chiral-glow:rgba(229, 169, 61, 0.5);--frost-blue:#4A90E2;--text-primary:#F8FAFC;--text-secondary:#94A3B8;--font-epic:'Cinzel', serif;--font-tech:'Inter', sans-serif}*{box-sizing:border-box;margin:0;padding:0}body{background-color:var(--bg-color);color:var(--text-primary);font-family:var(--font-tech);margin:0;padding:0;-webkit-font-smoothing:antialiased;font-weight:400}header{padding:1.5rem 5%;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--surface-border);background:rgba(5,6,8,.85);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);position:sticky;top:0;z-index:50;box-shadow:0 4px 30px rgba(0,0,0,.5)}.logo{font-family:var(--font-epic);font-size:1.25rem;font-weight:600;color:var(--text-primary);text-decoration:none;text-transform:uppercase;letter-spacing:2px}.back-link{font-family:var(--font-epic);color:var(--chiral-gold);text-decoration:none;font-size:.85rem;letter-spacing:2px;text-transform:uppercase;transition:color .3s;font-weight:600}.back-link:hover{color:#fff;text-shadow:0 0 10px var(--chiral-glow)}.content-container{max-width:800px;margin:0 auto;padding:4rem 2rem}.default-title{font-family:var(--font-epic);color:var(--text-primary);font-weight:500;letter-spacing:1px;font-size:2.5rem;margin-bottom:1rem;text-transform:uppercase}.default-date{color:var(--chiral-gold);font-family:var(--font-epic);font-size:.9rem;letter-spacing:2px;margin-bottom:3rem;font-weight:600}.article{font-family:var(--font-tech);color:var(--text-primary);line-height:1.8;font-size:1.15rem;font-weight:400}.tag-row{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:2.5rem}.tag{font-size:11px;padding:6px 14px;border-radius:4px;font-weight:600;font-family:var(--font-epic);letter-spacing:1px;text-transform:uppercase;border:1px solid;background:rgba(0,0,0,.3)}.tag-blue{color:var(--frost-blue)}.tag-teal{color:#2dd4bf}.tag-amber{color:var(--chiral-gold)}.tag-purple{color:#a78bfa}.tag-red{color:#f87171}h1{font-family:var(--font-epic);font-size:2.5rem;font-weight:600;line-height:1.25;margin-bottom:1rem;color:var(--text-primary);letter-spacing:2px;text-transform:uppercase}.subtitle{font-size:1.25rem;color:var(--chiral-gold);margin-bottom:2.5rem;line-height:1.6;font-weight:400}.divider{border:none;border-top:1px solid var(--surface-border);margin:2rem 0}h2{font-family:var(--font-epic);font-size:1.75rem;font-weight:600;margin-bottom:1.5rem;margin-top:3.5rem;display:flex;align-items:center;gap:12px;letter-spacing:1.5px;color:var(--text-primary);text-transform:uppercase;border-bottom:1px solid rgba(74,144,226,.2);padding-bottom:.5rem}h3{font-family:var(--font-epic);font-size:1.35rem;font-weight:600;color:var(--chiral-gold);margin-bottom:1rem;margin-top:2rem;letter-spacing:1px}p{margin-bottom:1.5rem}.callout{border-left:3px solid var(--frost-blue);background:rgba(74,144,226,8%);padding:1.25rem 1.5rem;border-radius:0 8px 8px 0;margin:2rem 0;font-family:var(--font-tech);box-shadow:0 4px 20px rgba(0,0,0,.2)}.callout p{margin:0;font-size:1.1rem;color:#e2e8f0}.callout.danger{border-left-color:#f87171;background:rgba(248,113,113,8%)}.callout.danger p{color:#fca5a5}.callout.success{border-left-color:#2dd4bf;background:rgba(45,212,191,8%)}.callout.success p{color:#99f6e4}.callout.warning{border-left-color:var(--chiral-gold);background:rgba(229,169,61,8%)}.callout.warning p{color:#fde68a}pre{background:#050608;border:1px solid var(--surface-border);border-left:3px solid var(--frost-blue);border-radius:6px;padding:1.5rem;overflow-x:auto;font-family:ui-monospace,monospace;font-size:14.5px;margin:2rem 0;line-height:1.7;color:#e2e8f0;box-shadow:0 10px 30px rgba(0,0,0,.6),inset 0 0 20px rgba(74,144,226,3%)}code{font-family:ui-monospace,monospace;color:#f8fafc;background:rgba(74,144,226,.15);border:1px solid rgba(74,144,226,.3);padding:2px 8px;border-radius:4px;font-size:.9em;text-shadow:0 0 5px rgba(74,144,226,.2);margin:0 2px}pre code{color:inherit;background:0 0;padding:0;border:none;text-shadow:none;margin:0}.kw{color:#4a90e2;font-weight:600;text-shadow:0 0 8px rgba(74,144,226,.4)}.fn{color:#e5a93d}.cm{color:#64748b;font-style:italic}.str{color:#2dd4bf}.result-compare{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin:2rem 0}.result-box{border:1px solid var(--surface-border);border-radius:6px;padding:1.5rem;background:rgba(15,18,25,.8);box-shadow:0 8px 24px rgba(0,0,0,.4)}.result-box.bad{border-top:3px solid #f87171}.result-box.good{border-top:3px solid #2dd4bf}.result-title{font-family:var(--font-epic);font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:2px;margin-bottom:1.5rem;display:flex;align-items:center;gap:8px}.result-box.bad .result-title{color:#fca5a5}.result-box.good .result-title{color:#99f6e4}.result-label{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:1px;margin-bottom:6px;color:var(--text-secondary);display:block}.result-val{font-family:ui-monospace,monospace;font-size:15px;font-weight:500}.result-box.bad .result-val{color:#fca5a5}.result-box.good .result-val{color:#99f6e4}.rules-grid{display:flex;flex-direction:column;gap:1.5rem;margin:2.5rem 0}.rule-card{border:1px solid var(--surface-border);border-radius:6px;padding:1.5rem;display:flex;gap:15px;align-items:flex-start;background:rgba(15,18,25,.6);transition:transform .3s,border-color .3s,box-shadow .3s;box-shadow:0 4px 15px rgba(0,0,0,.2)}.rule-card:hover{transform:translateY(-3px);border-color:var(--chiral-gold);box-shadow:0 8px 25px rgba(229,169,61,.15)}.rule-icon{width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:14px;font-family:var(--font-epic);font-weight:700;flex-shrink:0;margin-top:2px;border:1px solid}.rule-icon.green{color:#2dd4bf;box-shadow:0 0 10px rgba(45,212,191,.2)}.rule-icon.red{color:#f87171;box-shadow:0 0 10px rgba(248,113,113,.2)}.rule-icon.amber{color:var(--chiral-gold);box-shadow:0 0 10px rgba(229,169,61,.2)}.rule-text{font-size:1.1rem;line-height:1.7;color:var(--text-primary)}.rule-text strong{font-weight:600;color:#fff}.section-marker{display:flex;align-items:center;gap:15px;margin:4rem 0 2rem}.section-marker-line{flex:1;height:1px;background:linear-gradient(90deg,transparent,var(--chiral-gold),transparent);opacity:.5}.section-marker-label{font-family:var(--font-epic);font-size:13px;color:var(--chiral-gold);font-weight:700;letter-spacing:4px;text-transform:uppercase}.closing-box{background:rgba(15,18,25,.8);border:1px solid var(--chiral-gold);border-radius:6px;padding:2.5rem;margin-top:4rem;text-align:center;box-shadow:0 10px 30px rgba(0,0,0,.5),inset 0 0 20px rgba(229,169,61,5%)}.closing-box p{font-size:1.15rem;color:var(--text-primary);margin-bottom:.75rem}.closing-box p:last-child{margin:0}ul{padding-left:2rem;font-size:1.1rem;margin-bottom:1.5rem}ul li{margin-bottom:.75rem}@media(max-width:768px){header{padding:1.25rem 1.5rem}.logo{font-size:1.1rem}.back-link{font-size:.75rem}.result-compare{grid-template-columns:1fr}h1{font-size:2rem}h2{font-size:1.5rem}}</style></head><body><header><a href=/ class=logo>YOUSSEF JAD</a>
-<a href=/ class=back-link>← Return to Network</a></header><main class=content-container><div class=article><div class=tag-row><span class="tag tag-blue">MySQL</span>
-<span class="tag tag-teal">Performance</span>
-<span class="tag tag-amber">Backend</span></div><h1>You're Paying a Huge Performance Tax on Your JSON Columns. Here's the One-Line Fix.</h1><p class=subtitle>You stored it in JSON for flexibility. That flexibility is now costing you full table scans on every filter. Virtual columns are the escape hatch you didn't know existed.</p><hr class=divider><p>You know the moment. The product manager is changing requirements every other day, and you think: <em>"I'll just throw this into a JSON column for now and clean it up later."</em></p><p>Later never comes. The JSON column stays. The table grows to 5 million rows. And then one morning, your monitoring dashboard turns red.</p><div class="callout danger"><p>The query that filtered by a JSON key just timed out in production. Your DBA is asking questions you don't have answers to.</p></div><p>This is The JSON Trap. And almost every backend engineer walks into it at least once.</p><div class=section-marker><div class=section-marker-line></div><div class=section-marker-label>The problem</div><div class=section-marker-line></div></div><h2>MySQL is completely blind to what's inside your JSON</h2><p>Consider this classic setup — a products table with a flexible <code>attributes</code> column:</p><pre><span class=kw>CREATE TABLE</span> products (
-    id   <span class=fn>INT</span> AUTO_INCREMENT <span class=kw>PRIMARY KEY</span>,
-    name <span class=fn>VARCHAR</span>(255),
-    attributes <span class=fn>JSON</span>
-);</pre><p>A few weeks pass. Marketing wants product filtering by color. You write this:</p><pre><span class=kw>SELECT</span> * <span class=kw>FROM</span> products
-<span class=kw>WHERE</span> attributes->><span class=str>'$.color'</span> = <span class=str>'matte_black'</span>;</pre><p>Works perfectly on localhost with 100 rows. On production with 5 million rows? Run <code>EXPLAIN</code> and brace yourself:</p><div class=result-compare><div class="result-box bad"><div class=result-label>Before</div><div class=result-val>type: ALL</div><div class=result-note>Full table scan — every row, every time</div></div><div class="result-box good"><div class=result-label>After (what we'll fix)</div><div class=result-val>type: ref</div><div class=result-note>Index hit — sub-millisecond lookup</div></div></div><p><code>type: ALL</code> means MySQL is opening every single row, deserializing the JSON, extracting the key, and comparing it. You cannot put a standard B-Tree index on a JSON key path. The database is flying blind on every filter.</p><div class=section-marker><div class=section-marker-line></div><div class=section-marker-label>The fix</div><div class=section-marker-line></div></div><h2>Virtual columns: zero disk cost, full index power</h2><p>A <strong>Virtual Generated Column</strong> is MySQL's answer to this exact problem. It doesn't store anything on disk. It exposes a computed value — derived from an expression — as if it were a real column. And crucially: <strong>you can index it.</strong></p><p>Step 1 — expose the JSON key as a virtual column:</p><pre><span class=kw>ALTER TABLE</span> products
-<span class=kw>ADD COLUMN</span> product_color <span class=fn>VARCHAR</span>(50)
-<span class=kw>GENERATED ALWAYS AS</span> (attributes->><span class=str>'$.color'</span>) <span class=kw>VIRTUAL</span>;</pre><p>Step 2 — index it:</p><pre><span class=kw>ALTER TABLE</span> products <span class=kw>ADD INDEX</span> idx_product_color (product_color);</pre><p>That's it. Now run your original query:</p><pre><span class=kw>SELECT</span> * <span class=kw>FROM</span> products
-<span class=kw>WHERE</span> product_color = <span class=str>'matte_black'</span>;</pre><div class="callout success"><p><strong>EXPLAIN now shows <code>type: ref</code>.</strong> MySQL goes straight to the B-Tree index. It never touches the JSON payload during the search. You get schema-less flexibility with relational performance.</p></div><div class=section-marker><div class=section-marker-line></div><div class=section-marker-label>Under the hood</div><div class=section-marker-line></div></div><h2>The connection to functional indexes (this will click something)</h2><p>If you've read about MySQL 8.0's functional indexes — like <code>INDEX ((LOWER(email)))</code> — this pattern should look familiar. That's not a coincidence.</p><div class="callout warning"><p><strong>MySQL implements functional indexes by silently creating a hidden virtual column and indexing it.</strong> What you're doing here manually is exactly what MySQL does under the hood for functional indexes. Same mechanism, full control.</p></div><div class=section-marker><div class=section-marker-line></div><div class=section-marker-label>Battle-tested rules</div><div class=section-marker-line></div></div><h2>Three rules before you go index everything</h2><div class=rules-grid><div class=rule-card><div class="rule-icon green">1</div><div class=rule-text><strong>Always use VIRTUAL, not STORED.</strong> STORED columns are written to disk on every INSERT and UPDATE. For JSON key extraction — which is cheap CPU work — VIRTUAL is free at write time and zero disk overhead.</div></div><div class=rule-card><div class="rule-icon red">2</div><div class=rule-text><strong>If you're indexing it, ask if it should be JSON at all.</strong> A virtual column + index on a JSON key you filter 90% of the time is a code smell. <em>Promote it to a real column.</em> JSON is for sparse, truly dynamic attributes — not for your core domain fields.</div></div><div class=rule-card><div class="rule-icon amber">3</div><div class=rule-text><strong>This is a bridge, not a destination.</strong> Virtual columns buy you time. Use them to ship fast, then schedule the proper migration when query patterns are proven and stable.</div></div></div><div class=section-marker><div class=section-marker-line></div><div class=section-marker-label>Takeaway</div><div class=section-marker-line></div></div><div class=closing-box><p>JSON columns are a productivity tool — not a performance strategy.</p><p>Virtual columns let you have both: the flexibility of schema-less storage for dynamic attributes, and B-Tree index performance for everything you actually query on.</p><p style=color:var(--color-text-primary);font-weight:500;margin-top:.75rem>Two ALTER TABLE statements. Zero disk overhead. Full table scan eliminated.</p></div></div></main></body></html>
+<!DOCTYPE html>
+<html lang="en">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>You&#39;re Paying a Huge Performance Tax on Your JSON Columns. Here&#39;s the One-Line Fix. - YOUSSEF JAD | THE DIGITAL PORTER</title>
+
+    
+    <meta name="description" content="You stored it in JSON for flexibility. That flexibility is now costing you full table scans on every filter. Virtual columns are the escape hatch you …">
+
+    
+    <link rel="canonical" href="http://localhost:1313/posts/json-virtual-columns/">
+
+    
+    <link rel="alternate" type="application/rss+xml" title="YOUSSEF JAD | THE DIGITAL PORTER" href="http://localhost:1313/index.xml">
+
+    
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="YOUSSEF JAD | THE DIGITAL PORTER">
+    <meta property="og:title" content="You&#39;re Paying a Huge Performance Tax on Your JSON Columns. Here&#39;s the One-Line Fix.">
+    <meta property="og:description" content="You stored it in JSON for flexibility. That flexibility is now costing you full table scans on every filter. Virtual columns are the escape hatch you …">
+    <meta property="og:url" content="http://localhost:1313/posts/json-virtual-columns/">
+    <meta property="og:image" content="http://localhost:1313/images/hero-bg.png">
+    <meta property="article:published_time" content="2026-05-01T00:00:00Z">
+    <meta property="article:author" content="Youssef Jad">
+
+    
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="You&#39;re Paying a Huge Performance Tax on Your JSON Columns. Here&#39;s the One-Line Fix.">
+    <meta name="twitter:description" content="You stored it in JSON for flexibility. That flexibility is now costing you full table scans on every filter. Virtual columns are the escape hatch you …">
+    <meta name="twitter:image" content="http://localhost:1313/images/hero-bg.png">
+    <meta name="twitter:creator" content="@youssef_jad">
+
+    
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "\"You're Paying a Huge Performance Tax on Your JSON Columns. Here's the One-Line Fix.\"",
+      "description": "\"You stored it in JSON for flexibility. That flexibility is now costing you full table scans on every filter. Virtual columns are the escape hatch you …\"",
+      "datePublished": "2026-05-01T00:00:00Z",
+      "dateModified": "2026-05-01T00:00:00Z",
+      "url": "http:\/\/localhost:1313\/posts\/json-virtual-columns\/",
+      "image": "http:\/\/localhost:1313\/images\/hero-bg.png",
+      "author": {
+        "@type": "Person",
+        "name": "Youssef Jad",
+        "url": "http:\/\/localhost:1313\/",
+        "sameAs": [
+          "https://www.linkedin.com/in/youssef-jad/",
+          "https://github.com/youssef-jad"
+        ]
+      },
+      "publisher": {
+        "@type": "Person",
+        "name": "Youssef Jad",
+        "url": "http:\/\/localhost:1313\/"
+      }
+    }
+    </script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Cinzel:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-color: #050608;
+            --surface-color: rgba(15, 18, 25, 0.7);
+            --surface-border: rgba(74, 107, 130, 0.3);
+            --chiral-gold: #E5A93D;
+            --chiral-glow: rgba(229, 169, 61, 0.5);
+            --frost-blue: #4A90E2;
+            --text-primary: #F8FAFC;
+            --text-secondary: #94A3B8;
+            --font-epic: 'Cinzel', serif;
+            --font-tech: 'Inter', sans-serif;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-primary);
+            font-family: var(--font-tech);
+            margin: 0;
+            padding: 0;
+            -webkit-font-smoothing: antialiased;
+            font-weight: 400;  
+        }
+
+        header {
+            padding: 1.5rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--surface-border);
+            background: rgba(5, 6, 8, 0.85);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            position: sticky;
+            top: 0;
+            z-index: 50;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
+        }
+
+        .logo {
+            font-family: var(--font-epic);
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .back-link {
+            font-family: var(--font-epic);
+            color: var(--chiral-gold);
+            text-decoration: none;
+            font-size: 0.85rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            transition: color 0.3s;
+            font-weight: 600;
+        }
+
+        .back-link:hover {
+            color: #fff;
+            text-shadow: 0 0 10px var(--chiral-glow);
+        }
+
+        .content-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+        }
+        
+        .default-title {
+            font-family: var(--font-epic);
+            color: var(--text-primary);
+            font-weight: 500;
+            letter-spacing: 1px;
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+        }
+        
+        .default-date {
+            color: var(--chiral-gold);
+            font-family: var(--font-epic);
+            font-size: 0.9rem;
+            letter-spacing: 2px;
+            margin-bottom: 3rem;
+            font-weight: 600;
+        }
+
+         
+        .article { font-family: var(--font-tech); color: var(--text-primary); line-height: 1.8; font-size: 1.15rem; font-weight: 400; }
+        .tag-row { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 2.5rem; }
+        .tag { font-size: 11px; padding: 6px 14px; border-radius: 4px; font-weight: 600; font-family: var(--font-epic); letter-spacing: 1px; text-transform: uppercase; border: 1px solid currentColor; background: rgba(0,0,0,0.3); }
+        .tag-blue { color: var(--frost-blue); }
+        .tag-teal { color: #2DD4BF; }
+        .tag-amber { color: var(--chiral-gold); }
+        .tag-purple { color: #A78BFA; }
+        .tag-red { color: #F87171; }
+        
+        h1 { font-family: var(--font-epic); font-size: 2.5rem; font-weight: 600; line-height: 1.25; margin-bottom: 1rem; color: var(--text-primary); letter-spacing: 2px; text-transform: uppercase; }
+        .subtitle { font-size: 1.25rem; color: var(--chiral-gold); margin-bottom: 2.5rem; line-height: 1.6; font-weight: 400; }
+        .divider { border: none; border-top: 1px solid var(--surface-border); margin: 2rem 0; }
+        h2 { font-family: var(--font-epic); font-size: 1.75rem; font-weight: 600; margin-bottom: 1.5rem; margin-top: 3.5rem; display: flex; align-items: center; gap: 12px; letter-spacing: 1.5px; color: var(--text-primary); text-transform: uppercase; border-bottom: 1px solid rgba(74, 144, 226, 0.2); padding-bottom: 0.5rem; }
+        h3 { font-family: var(--font-epic); font-size: 1.35rem; font-weight: 600; color: var(--chiral-gold); margin-bottom: 1rem; margin-top: 2rem; letter-spacing: 1px; }
+        p { margin-bottom: 1.5rem; }
+        
+         
+        .callout { border-left: 3px solid var(--frost-blue); background: rgba(74, 144, 226, 0.08); padding: 1.25rem 1.5rem; border-radius: 0 8px 8px 0; margin: 2rem 0; font-family: var(--font-tech); box-shadow: 0 4px 20px rgba(0,0,0,0.2); }
+        .callout p { margin: 0; font-size: 1.1rem; color: #E2E8F0; }
+        .callout.danger { border-left-color: #F87171; background: rgba(248, 113, 113, 0.08); }
+        .callout.danger p { color: #FCA5A5; }
+        .callout.success { border-left-color: #2DD4BF; background: rgba(45, 212, 191, 0.08); }
+        .callout.success p { color: #99F6E4; }
+        .callout.warning { border-left-color: var(--chiral-gold); background: rgba(229, 169, 61, 0.08); }
+        .callout.warning p { color: #FDE68A; }
+        
+         
+        pre { background: #050608; border: 1px solid var(--surface-border); border-left: 3px solid var(--frost-blue); border-radius: 6px; padding: 1.5rem; overflow-x: auto; font-family: ui-monospace, monospace; font-size: 14.5px; margin: 2rem 0; line-height: 1.7; color: #E2E8F0; box-shadow: 0 10px 30px rgba(0,0,0,0.6), inset 0 0 20px rgba(74, 144, 226, 0.03); }
+        code { font-family: ui-monospace, monospace; color: #F8FAFC; background: rgba(74, 144, 226, 0.15); border: 1px solid rgba(74, 144, 226, 0.3); padding: 2px 8px; border-radius: 4px; font-size: 0.9em; text-shadow: 0 0 5px rgba(74, 144, 226, 0.2); margin: 0 2px; }
+        pre code { color: inherit; background: transparent; padding: 0; border: none; text-shadow: none; margin: 0; }
+        
+         
+        .kw { color: #4A90E2; font-weight: 600; text-shadow: 0 0 8px rgba(74, 144, 226, 0.4); }  
+        .fn { color: #E5A93D; }  
+        .cm { color: #64748B; font-style: italic; }  
+        .str { color: #2DD4BF; }  
+
+         
+        .result-compare { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin: 2rem 0; }
+        .result-box { border: 1px solid var(--surface-border); border-radius: 6px; padding: 1.5rem; background: rgba(15, 18, 25, 0.8); box-shadow: 0 8px 24px rgba(0,0,0,0.4); }
+        .result-box.bad { border-top: 3px solid #F87171; }
+        .result-box.good { border-top: 3px solid #2DD4BF; }
+        .result-title { font-family: var(--font-epic); font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 1.5rem; display: flex; align-items: center; gap: 8px; }
+        .result-box.bad .result-title { color: #FCA5A5; }
+        .result-box.good .result-title { color: #99F6E4; }
+        .result-label { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 6px; color: var(--text-secondary); display: block; }
+        .result-val { font-family: ui-monospace, monospace; font-size: 15px; font-weight: 500; }
+        .result-box.bad .result-val { color: #FCA5A5; }
+        .result-box.good .result-val { color: #99F6E4; }
+        
+         
+        .rules-grid { display: flex; flex-direction: column; gap: 1.5rem; margin: 2.5rem 0; }
+        .rule-card { border: 1px solid var(--surface-border); border-radius: 6px; padding: 1.5rem; display: flex; gap: 15px; align-items: flex-start; background: rgba(15, 18, 25, 0.6); transition: transform 0.3s, border-color 0.3s, box-shadow 0.3s; box-shadow: 0 4px 15px rgba(0,0,0,0.2); }
+        .rule-card:hover { transform: translateY(-3px); border-color: var(--chiral-gold); box-shadow: 0 8px 25px rgba(229, 169, 61, 0.15); }
+        .rule-icon { width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 14px; font-family: var(--font-epic); font-weight: 700; flex-shrink: 0; margin-top: 2px; border: 1px solid currentColor; }
+        .rule-icon.green { color: #2DD4BF; box-shadow: 0 0 10px rgba(45, 212, 191, 0.2); }
+        .rule-icon.red { color: #F87171; box-shadow: 0 0 10px rgba(248, 113, 113, 0.2); }
+        .rule-icon.amber { color: var(--chiral-gold); box-shadow: 0 0 10px rgba(229, 169, 61, 0.2); }
+        .rule-text { font-size: 1.1rem; line-height: 1.7; color: var(--text-primary); }
+        .rule-text strong { font-weight: 600; color: #fff; }
+        
+         
+        .section-marker { display: flex; align-items: center; gap: 15px; margin: 4rem 0 2rem; }
+        .section-marker-line { flex: 1; height: 1px; background: linear-gradient(90deg, transparent, var(--chiral-gold), transparent); opacity: 0.5; }
+        .section-marker-label { font-family: var(--font-epic); font-size: 13px; color: var(--chiral-gold); font-weight: 700; letter-spacing: 4px; text-transform: uppercase; }
+        .closing-box { background: rgba(15, 18, 25, 0.8); border: 1px solid var(--chiral-gold); border-radius: 6px; padding: 2.5rem; margin-top: 4rem; text-align: center; box-shadow: 0 10px 30px rgba(0,0,0,0.5), inset 0 0 20px rgba(229, 169, 61, 0.05); }
+        .closing-box p { font-size: 1.15rem; color: var(--text-primary); margin-bottom: 0.75rem; }
+        .closing-box p:last-child { margin: 0; }
+        ul { padding-left: 2rem; font-size: 1.1rem; margin-bottom: 1.5rem; }
+        ul li { margin-bottom: 0.75rem; }
+        
+        @media (max-width: 768px) {
+            header { padding: 1.25rem 1.5rem; }
+            .logo { font-size: 1.1rem; }
+            .back-link { font-size: 0.75rem; }
+            .result-compare { grid-template-columns: 1fr; }
+            h1 { font-size: 2rem; }
+            h2 { font-size: 1.5rem; }
+        }
+
+         
+        .post-meta {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            margin-bottom: 3rem;
+            flex-wrap: wrap;
+        }
+        .post-meta-item {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-family: var(--font-epic);
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+        }
+        .post-meta-item.gold { color: var(--chiral-gold); }
+
+         
+        .share-bar {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin: 3rem 0 1rem;
+            padding: 1.5rem;
+            border: 1px solid var(--surface-border);
+            border-radius: 8px;
+            background: rgba(15, 18, 25, 0.6);
+            flex-wrap: wrap;
+        }
+        .share-label {
+            font-family: var(--font-epic);
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            flex: 1;
+        }
+        .share-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 0.6rem 1.4rem;
+            border-radius: 6px;
+            font-family: var(--font-epic);
+            font-size: 0.8rem;
+            font-weight: 600;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        .share-btn-linkedin {
+            background: rgba(10, 102, 194, 0.15);
+            border: 1px solid rgba(10, 102, 194, 0.5);
+            color: #6eb1f7;
+        }
+        .share-btn-linkedin:hover {
+            background: rgba(10, 102, 194, 0.3);
+            border-color: rgba(10, 102, 194, 0.8);
+            color: #fff;
+            transform: translateY(-2px);
+        }
+
+         
+        .follow-cta {
+            background: rgba(15, 18, 25, 0.8);
+            border: 1px solid rgba(74, 107, 130, 0.4);
+            border-top: 2px solid var(--frost-blue);
+            border-radius: 8px;
+            padding: 2rem;
+            margin-top: 3rem;
+            text-align: center;
+        }
+        .follow-cta p {
+            font-size: 1rem;
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+        }
+        .follow-cta a {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 0.7rem 2rem;
+            background: rgba(10, 102, 194, 0.15);
+            border: 1px solid rgba(10, 102, 194, 0.5);
+            border-radius: 6px;
+            color: #6eb1f7;
+            font-family: var(--font-epic);
+            font-size: 0.8rem;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        .follow-cta a:hover {
+            background: rgba(10, 102, 194, 0.3);
+            color: #fff;
+            transform: translateY(-2px);
+        }
+
+         
+        .site-footer {
+            background: rgba(5, 6, 8, 0.9);
+            border-top: 1px solid var(--surface-border);
+            padding: 2.5rem 5%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+        }
+        .footer-brand {
+            font-family: var(--font-epic);
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+        .footer-links {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+        }
+        .footer-link {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-family: var(--font-epic);
+            font-size: 0.75rem;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            transition: color 0.3s ease;
+        }
+        .footer-link:hover { color: var(--chiral-gold); }
+        .footer-copy {
+            font-size: 0.75rem;
+            color: rgba(148, 163, 184, 0.5);
+            font-family: var(--font-tech);
+        }
+        @media (max-width: 768px) {
+            .site-footer { justify-content: center; text-align: center; }
+            .share-bar { flex-direction: column; align-items: flex-start; }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <a href="/" class="logo">YOUSSEF JAD</a>
+        <a href="/" class="back-link">← Return to Network</a>
+    </header>
+    <main class="content-container">
+        
+        <div class="post-meta">
+            <span class="post-meta-item gold">2026.05.01</span>
+            <span class="post-meta-item">4 min read</span>
+        </div>
+
+         stored it in JSON for flexibility. That flexibility is now costing you full table scans on every filter. Virtual columns are the escape hatch you didn't know existed."
+---
+
+
+
+
+<div class="article">
+  <div class="tag-row">
+    <span class="tag tag-blue">MySQL</span>
+    <span class="tag tag-teal">Performance</span>
+    <span class="tag tag-amber">Backend</span>
+  </div>
+
+  <h1>You're Paying a Huge Performance Tax on Your JSON Columns. Here's the One-Line Fix.</h1>
+  <p class="subtitle">You stored it in JSON for flexibility. That flexibility is now costing you full table scans on every filter. Virtual columns are the escape hatch you didn't know existed.</p>
+
+  <hr class="divider">
+
+  <p>You know the moment. The product manager is changing requirements every other day, and you think: <em>"I'll just throw this into a JSON column for now and clean it up later."</em></p>
+  <p>Later never comes. The JSON column stays. The table grows to 5 million rows. And then one morning, your monitoring dashboard turns red.</p>
+
+  <div class="callout danger">
+    <p>The query that filtered by a JSON key just timed out in production. Your DBA is asking questions you don't have answers to.</p>
+  </div>
+
+  <p>This is The JSON Trap. And almost every backend engineer walks into it at least once.</p>
+
+  <div class="section-marker">
+    <div class="section-marker-line"></div>
+    <div class="section-marker-label">The problem</div>
+    <div class="section-marker-line"></div>
+  </div>
+
+  <h2>MySQL is completely blind to what's inside your JSON</h2>
+
+  <p>Consider this classic setup — a products table with a flexible <code>attributes</code> column:</p>
+
+  <pre><span class="kw">CREATE TABLE</span> products (
+    id   <span class="fn">INT</span> AUTO_INCREMENT <span class="kw">PRIMARY KEY</span>,
+    name <span class="fn">VARCHAR</span>(255),
+    attributes <span class="fn">JSON</span>
+);</pre>
+
+  <p>A few weeks pass. Marketing wants product filtering by color. You write this:</p>
+
+  <pre><span class="kw">SELECT</span> * <span class="kw">FROM</span> products
+<span class="kw">WHERE</span> attributes->><span class="str">'$.color'</span> = <span class="str">'matte_black'</span>;</pre>
+
+  <p>Works perfectly on localhost with 100 rows. On production with 5 million rows? Run <code>EXPLAIN</code> and brace yourself:</p>
+
+  <div class="result-compare">
+    <div class="result-box bad">
+      <div class="result-label">Before</div>
+      <div class="result-val">type: ALL</div>
+      <div class="result-note">Full table scan — every row, every time</div>
+    </div>
+    <div class="result-box good">
+      <div class="result-label">After (what we'll fix)</div>
+      <div class="result-val">type: ref</div>
+      <div class="result-note">Index hit — sub-millisecond lookup</div>
+    </div>
+  </div>
+
+  <p><code>type: ALL</code> means MySQL is opening every single row, deserializing the JSON, extracting the key, and comparing it. You cannot put a standard B-Tree index on a JSON key path. The database is flying blind on every filter.</p>
+
+  <div class="section-marker">
+    <div class="section-marker-line"></div>
+    <div class="section-marker-label">The fix</div>
+    <div class="section-marker-line"></div>
+  </div>
+
+  <h2>Virtual columns: zero disk cost, full index power</h2>
+
+  <p>A <strong>Virtual Generated Column</strong> is MySQL's answer to this exact problem. It doesn't store anything on disk. It exposes a computed value — derived from an expression — as if it were a real column. And crucially: <strong>you can index it.</strong></p>
+
+  <p>Step 1 — expose the JSON key as a virtual column:</p>
+
+  <pre><span class="kw">ALTER TABLE</span> products
+<span class="kw">ADD COLUMN</span> product_color <span class="fn">VARCHAR</span>(50)
+<span class="kw">GENERATED ALWAYS AS</span> (attributes->><span class="str">'$.color'</span>) <span class="kw">VIRTUAL</span>;</pre>
+
+  <p>Step 2 — index it:</p>
+
+  <pre><span class="kw">ALTER TABLE</span> products <span class="kw">ADD INDEX</span> idx_product_color (product_color);</pre>
+
+  <p>That's it. Now run your original query:</p>
+
+  <pre><span class="kw">SELECT</span> * <span class="kw">FROM</span> products
+<span class="kw">WHERE</span> product_color = <span class="str">'matte_black'</span>;</pre>
+
+  <div class="callout success">
+    <p><strong>EXPLAIN now shows <code>type: ref</code>.</strong> MySQL goes straight to the B-Tree index. It never touches the JSON payload during the search. You get schema-less flexibility with relational performance.</p>
+  </div>
+
+  <div class="section-marker">
+    <div class="section-marker-line"></div>
+    <div class="section-marker-label">Under the hood</div>
+    <div class="section-marker-line"></div>
+  </div>
+
+  <h2>The connection to functional indexes (this will click something)</h2>
+
+  <p>If you've read about MySQL 8.0's functional indexes — like <code>INDEX ((LOWER(email)))</code> — this pattern should look familiar. That's not a coincidence.</p>
+
+  <div class="callout warning">
+    <p><strong>MySQL implements functional indexes by silently creating a hidden virtual column and indexing it.</strong> What you're doing here manually is exactly what MySQL does under the hood for functional indexes. Same mechanism, full control.</p>
+  </div>
+
+  <div class="section-marker">
+    <div class="section-marker-line"></div>
+    <div class="section-marker-label">Battle-tested rules</div>
+    <div class="section-marker-line"></div>
+  </div>
+
+  <h2>Three rules before you go index everything</h2>
+
+  <div class="rules-grid">
+    <div class="rule-card">
+      <div class="rule-icon green">1</div>
+      <div class="rule-text"><strong>Always use VIRTUAL, not STORED.</strong> STORED columns are written to disk on every INSERT and UPDATE. For JSON key extraction — which is cheap CPU work — VIRTUAL is free at write time and zero disk overhead.</div>
+    </div>
+    <div class="rule-card">
+      <div class="rule-icon red">2</div>
+      <div class="rule-text"><strong>If you're indexing it, ask if it should be JSON at all.</strong> A virtual column + index on a JSON key you filter 90% of the time is a code smell. <em>Promote it to a real column.</em> JSON is for sparse, truly dynamic attributes — not for your core domain fields.</div>
+    </div>
+    <div class="rule-card">
+      <div class="rule-icon amber">3</div>
+      <div class="rule-text"><strong>This is a bridge, not a destination.</strong> Virtual columns buy you time. Use them to ship fast, then schedule the proper migration when query patterns are proven and stable.</div>
+    </div>
+  </div>
+
+  <div class="section-marker">
+    <div class="section-marker-line"></div>
+    <div class="section-marker-label">Takeaway</div>
+    <div class="section-marker-line"></div>
+  </div>
+
+  <div class="closing-box">
+    <p>JSON columns are a productivity tool — not a performance strategy.</p>
+    <p>Virtual columns let you have both: the flexibility of schema-less storage for dynamic attributes, and B-Tree index performance for everything you actually query on.</p>
+    <p styl
+
+        
+        <div class="share-bar">
+            <span class="share-label">Share this post</span>
+            <a class="share-btn share-btn-linkedin"
+               href="https://www.linkedin.com/sharing/share-offsite/?url=http%3A%2F%2Flocalhost%3A1313%2Fposts%2Fjson-virtual-columns%2F"
+               target="_blank" rel="noopener">
+               <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+               Share on LinkedIn
+            </a>
+        </div>
+
+        
+        <div class="follow-cta">
+            <p>If this was useful, let's connect. I write about engineering leadership, backend architecture, and lessons from building products at scale.</p>
+            <a href="https://www.linkedin.com/in/youssef-jad/" target="_blank" rel="noopener">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+                Follow on LinkedIn
+            </a>
+        </div>
+    </main>
+
+    <footer class="site-footer">
+        <span class="footer-brand">Youssef Jad &copy; 2026</span>
+        <nav class="footer-links">
+            <a class="footer-link" href="https://www.linkedin.com/in/youssef-jad/" target="_blank" rel="noopener">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+                LinkedIn
+            </a>
+            <a class="footer-link" href="https://github.com/youssef-jad" target="_blank" rel="noopener">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+                GitHub
+            </a>
+            <a class="footer-link" href="/index.xml">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M6.18 15.64a2.18 2.18 0 0 1 2.18 2.18C8.36 19.01 7.38 20 6.18 20C4.98 20 4 19.01 4 17.82a2.18 2.18 0 0 1 2.18-2.18M4 4.44A15.56 15.56 0 0 1 19.56 20h-2.83A12.73 12.73 0 0 0 4 7.27V4.44m0 5.66a9.9 9.9 0 0 1 9.9 9.9h-2.83A7.07 7.07 0 0 0 4 12.93V10.1z"/></svg>
+                RSS
+            </a>
+        </nav>
+        <span class="footer-copy">Senior Software Engineer · Tech Lead at Zid</span>
+    </footer>
+</body>
+</html>
