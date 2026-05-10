@@ -3,13 +3,13 @@
 <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>I Lost My Mother. A Video Game Helped Me Carry the Weight. - YOUSSEF JAD | THE DIGITAL PORTER</title>
+    <title>Fuzzy Arabic Search Without Elasticsearch: Solving التشكيل, الألف, and المد in PostgreSQL - YOUSSEF JAD | THE DIGITAL PORTER</title>
 
     
-    <meta name="description" content="A personal reflection on grief, carrying weight, and what Death Stranding taught me about moving forward after loss.">
+    <meta name="description" content="Building fuzzy Arabic search in PostgreSQL without Elasticsearch. We solve diacritics, character variants, and the multi-schema operator hell.">
 
     
-    <link rel="canonical" href="http://localhost:1313/posts/death-stranding-grief/">
+    <link rel="canonical" href="http://localhost:1313/posts/fuzzy-arabic-search/">
 
     
     <link rel="alternate" type="application/rss+xml" title="YOUSSEF JAD | THE DIGITAL PORTER" href="http://localhost:1313/index.xml">
@@ -17,17 +17,17 @@
     
     <meta property="og:type" content="article">
     <meta property="og:site_name" content="YOUSSEF JAD | THE DIGITAL PORTER">
-    <meta property="og:title" content="I Lost My Mother. A Video Game Helped Me Carry the Weight.">
-    <meta property="og:description" content="A personal reflection on grief, carrying weight, and what Death Stranding taught me about moving forward after loss.">
-    <meta property="og:url" content="http://localhost:1313/posts/death-stranding-grief/">
+    <meta property="og:title" content="Fuzzy Arabic Search Without Elasticsearch: Solving التشكيل, الألف, and المد in PostgreSQL">
+    <meta property="og:description" content="Building fuzzy Arabic search in PostgreSQL without Elasticsearch. We solve diacritics, character variants, and the multi-schema operator hell.">
+    <meta property="og:url" content="http://localhost:1313/posts/fuzzy-arabic-search/">
     <meta property="og:image" content="http://localhost:1313/images/hero-bg.png">
-    <meta property="article:published_time" content="2026-05-02T02:20:00&#43;03:00">
+    <meta property="article:published_time" content="2026-05-10T00:00:00Z">
     <meta property="article:author" content="Youssef Jad">
 
     
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="I Lost My Mother. A Video Game Helped Me Carry the Weight.">
-    <meta name="twitter:description" content="A personal reflection on grief, carrying weight, and what Death Stranding taught me about moving forward after loss.">
+    <meta name="twitter:title" content="Fuzzy Arabic Search Without Elasticsearch: Solving التشكيل, الألف, and المد in PostgreSQL">
+    <meta name="twitter:description" content="Building fuzzy Arabic search in PostgreSQL without Elasticsearch. We solve diacritics, character variants, and the multi-schema operator hell.">
     <meta name="twitter:image" content="http://localhost:1313/images/hero-bg.png">
     <meta name="twitter:creator" content="@youssef_jad">
 
@@ -36,11 +36,11 @@
     {
       "@context": "https://schema.org",
       "@type": "Article",
-      "headline": "\"I Lost My Mother. A Video Game Helped Me Carry the Weight.\"",
-      "description": "\"A personal reflection on grief, carrying weight, and what Death Stranding taught me about moving forward after loss.\"",
-      "datePublished": "2026-05-02T02:20:00\u002b03:00",
-      "dateModified": "2026-05-02T02:20:00\u002b03:00",
-      "url": "http:\/\/localhost:1313\/posts\/death-stranding-grief\/",
+      "headline": "\"Fuzzy Arabic Search Without Elasticsearch: Solving التشكيل, الألف, and المد in PostgreSQL\"",
+      "description": "\"Building fuzzy Arabic search in PostgreSQL without Elasticsearch. We solve diacritics, character variants, and the multi-schema operator hell.\"",
+      "datePublished": "2026-05-10T00:00:00Z",
+      "dateModified": "2026-05-10T00:00:00Z",
+      "url": "http:\/\/localhost:1313\/posts\/fuzzy-arabic-search\/",
       "image": "http:\/\/localhost:1313\/images\/hero-bg.png",
       "author": {
         "@type": "Person",
@@ -518,58 +518,396 @@
     </header>
     <main class="content-container">
         
-        <h1 class="default-title">I Lost My Mother. A Video Game Helped Me Carry the Weight.</h1>
-        
         <div class="post-meta">
-            <span class="post-meta-item gold">2026.05.02</span>
-            <span class="post-meta-item">2 min read</span>
+            <span class="post-meta-item gold">2026.05.10</span>
+            <span class="post-meta-item">8 min read</span>
         </div>
 
         
 <div class="article">
   <div class="tag-row">
-    <span class="tag tag-amber">Personal</span>
-    <span class="tag tag-blue">Death Stranding</span>
-    <span class="tag tag-teal">Life</span>
+    <span class="tag tag-blue">PostgreSQL</span>
+    <span class="tag tag-teal">Arabic NLP</span>
+    <span class="tag tag-amber">Backend</span>
+    <span class="tag tag-purple">DatabaseOptimization</span>
   </div>
 
-  <p class="subtitle">Recently I lost my Mother around 3 months ago and to be honest I didn't pass her death yet.</p>
+  <h1>Fuzzy Arabic Search Without Elasticsearch: Solving التشكيل, الألف, and المد in PostgreSQL</h1>
+  
+  <p class="subtitle">You need fuzzy Arabic search but don't want to introduce Elasticsearch. PostgreSQL can do it—but Arabic diacritics, character variants, and multi-schema operator issues will fight you every step of the way. This is how to win against all three.<br><br>And why you'll sleep better knowing search doesn't depend on another service.</p>
 
-  <div style="margin: 3rem 0; text-align: center;">
-    <img src="/images/d1.webp" alt="Death Stranding emotional moment" style="max-width: 100%; height: auto; border-radius: 8px; border: 1px solid var(--surface-border); box-shadow: 0 10px 30px rgba(0,0,0,0.5);">
+  <div class="section-marker">
+    <div class="section-marker-line"></div>
+    <div class="section-marker-label">The Problem</div>
+    <div class="section-marker-line"></div>
   </div>
 
-  <p>I'm still in Emotional Trauma. I don't think grief works that way — you don't pass it, you carry it. Some days the weight is manageable. Most nights it isn't.</p>
+  <h2>Why You Can't Ignore Arabic Text Search</h2>
 
-  <p>I remember the last night with her clearly — and I wish I didn't.</p>
+  <p>Your users are searching for reports. They type "اجمالي" and expect to find everything matching that word. Simple, right?</p>
 
-  <p>The day I lost my mom in my arms while running to the nearest hospital like Sam Porter trying to revive LUO. Every second I was counting inside my mind driving the car, shouting out to the emergency doctors briefing them about her health condition and racing against the void while having a mix of hope, fear, and a rain of tears that was aging me.</p>
+  <p>Wrong.</p>
 
-  <hr class="divider">
+  <p>They find nothing. Because the database contains "إجمالي المبيعات" and "اجمالي المدينة" and "أجمالي العملاء"—all slightly different in diacritics or character variants, none of which match the naked string they typed.</p>
 
-  <p>Back to work and trying to keep my productivity up, but inside me my spirit was fading slowly. Day after day, night after night, insomnia till I fall asleep I don't know how.</p>
+  <p>Your first instinct: "Elastic Search will fix this." And yes, Elasticsearch has Arabic analyzers. But now you're running another service. Another database. Another synchronization problem. Another moving part that can break at 3 AM.</p>
 
-  <p>Days felt slowly fading, trying to isolate my inside self and keeping my mind busy with work, but my soul was still at the stranding beach.</p>
+  <p>PostgreSQL can solve this. It's not as famous. It's not as simple. But it's <em>yours</em>—and it doesn't require another service.</p>
 
-  <div class="callout warning">
-    <p>I decided to spend my insomnia nights Playing Death Stranding, starting a new game and clearing my old saves and started my walking journey.</p>
+  <div class="callout">
+    <p><strong>The constraint:</strong> You want fuzzy Arabic search that lives entirely in PostgreSQL. No external services. No distributed complexity. Just your database doing the work.</p>
   </div>
 
-  <p>Step after step, delivery after delivery: "every path I took became a road for others." I was falling, but Sam Porter and Bridgets kept me going.</p>
-
-  <p>Delivery after delivery, cutscene after cutscene, I deeply let my emotions sink into the beach. Inside me, it's the journey to deliver the package from within my soul. It was not just a game.</p>
-
-  <p>It was fighting against my soul's grief to keep going, and keep going.</p>
-
-  <div style="margin: 3rem 0; text-align: center;">
-    <img src="/images/d2.webp" alt="Sam Porter Bridges keeping on" style="max-width: 100%; height: auto; border-radius: 8px; border: 1px solid var(--surface-border); box-shadow: 0 10px 30px rgba(0,0,0,0.5);">
+  <div class="section-marker">
+    <div class="section-marker-line"></div>
+    <div class="section-marker-label">The Linguistics</div>
+    <div class="section-marker-line"></div>
   </div>
 
-  <div class="closing-box" style="text-align: center; margin-top: 4rem;">
-    <p style="font-size: 1.25rem; font-family: var(--font-epic); color: var(--chiral-gold); letter-spacing: 2px;">I'm still walking and doing delivery after delivery, and I will find your beach mom one day.</p>
-    <p style="font-family: ui-monospace, monospace; color: var(--frost-blue); margin-top: 1rem; font-size: 1rem;">"I'll keep on keeping on"</p>
+  <h2>Three Problems That Break String Matching</h2>
+
+  <p>Arabic text search fails for three specific reasons. Understanding them is half the battle.</p>
+
+  <h3>Problem 1: Tashkeel – التشكيل (Diacritical Marks)</h3>
+
+  <p>Arabic diacritical marks—fatḥah, dammah, kasrah, sukūn, shadda—are phonetic guides. They don't change the word's <em>meaning</em>, but PostgreSQL treats them as different characters.</p>
+
+  <div class="result-compare">
+    <div class="result-box bad">
+      <div class="result-label">User types</div>
+      <div class="result-val">"اجمالي"</div>
+      <div class="result-note">7 characters, no diacritics</div>
+    </div>
+    <div class="result-box bad">
+      <div class="result-label">Database has</div>
+      <div class="result-val">"إجمالي"</div>
+      <div class="result-note">7 characters + hamza + diacritics</div>
+    </div>
   </div>
 
+  <p><code>=</code> fails. <code>LIKE</code> fails. <code>substring</code> fails. You get zero results.</p>
+
+  <h3>Problem 2: Hamza Variants – الهمزة (Alef Chaos)</h3>
+
+  <p>The letter Alef has four Unicode representations. They're linguistically identical.</p>
+
+  <ul>
+    <li><strong>أ</strong> U+0623 (Alef with Hamza Above)</li>
+    <li><strong>إ</strong> U+0625 (Alef with Hamza Below)</li>
+    <li><strong>آ</strong> U+0622 (Alef with Madda)</li>
+    <li><strong>ٱ</strong> U+0671 (Alef Wasla)</li>
+  </ul>
+
+  <p>All should match a bare <strong>ا</strong> U+0627 (Alef).</p>
+
+  <p>They don't. A user typing "ايرادات" won't find "أيرادات" or "إيرادات" even though they're the same word spelled four different ways.</p>
+
+  <h3>Problem 3: Character Equivalents – تهجئة (Accepted Spelling)</h3>
+
+  <p>Some letters have accepted replacements in different regions or styles:</p>
+
+  <ul>
+    <li><strong>ة</strong> (Teh Marbuta) can be written as <strong>ه</strong> (Heh) in informal text</li>
+    <li><strong>ى</strong> (Alef Maqsura) can be written as <strong>ي</strong> (Yeh)</li>
+  </ul>
+
+  <p>Your users expect these to match. PostgreSQL doesn't.</p>
+
+  <div class="callout danger">
+    <p><strong>The reality:</strong> Out-of-the-box PostgreSQL string matching treats Arabic like ASCII. It fails immediately. You have to build the solution yourself.</p>
+  </div>
+
+  <div class="section-marker">
+    <div class="section-marker-line"></div>
+    <div class="section-marker-label">The PostgreSQL Solution</div>
+    <div class="section-marker-line"></div>
+  </div>
+
+  <h2>🛠️ How PostgreSQL Handles This</h2>
+
+  <p>PostgreSQL has the tools. You just need to use them correctly.</p>
+
+  <h3>Step 1: Normalize Text with a Function</h3>
+
+  <p>Create a deterministic SQL function that normalizes Arabic text by:</p>
+
+  <ol>
+    <li>Removing all diacritical marks</li>
+    <li>Collapsing Hamza variants to bare Alef</li>
+    <li>Normalizing character equivalents</li>
+  </ol>
+
+  <pre><code><span class="kw">CREATE OR REPLACE FUNCTION</span> normalize_arabic(input <span class="fn">text</span>)
+<span class="kw">RETURNS</span> <span class="fn">text</span>
+<span class="kw">LANGUAGE</span> sql
+<span class="kw">IMMUTABLE</span>
+<span class="kw">STRICT</span>
+<span class="kw">PARALLEL SAFE</span>
+<span class="kw">AS</span> $$
+<span class="kw">SELECT</span>
+  regexp_replace(
+    regexp_replace(
+      regexp_replace(
+        regexp_replace(
+          lower(input),
+          <span class="str">'[ً-ٟـ]'</span>, <span class="str">''</span>, <span class="str">'g'</span>),  <span class="cm">-- Strip diacritics</span>
+        <span class="str">'[أإآٱ]'</span>, <span class="str">'ا'</span>, <span class="str">'g'</span>),  <span class="cm">-- Hamza → bare Alef</span>
+      <span class="str">'ة'</span>, <span class="str">'ه'</span>, <span class="str">'g'</span>),  <span class="cm">-- Teh Marbuta → Heh</span>
+    <span class="str">'ى'</span>, <span class="str">'ي'</span>, <span class="str">'g'</span>)  <span class="cm">-- Alef Maqsura → Yeh</span>
+$$;</code></pre>
+
+  <p><strong>Why these keywords matter:</strong></p>
+
+  <div class="rules-grid">
+    <div class="rule-card">
+      <div class="rule-icon green">✓</div>
+      <div class="rule-text"><strong>IMMUTABLE</strong> — PostgreSQL can use this in indexes. Without it, PostgreSQL refuses to optimize because it can't guarantee the function won't change results.</div>
+    </div>
+    <div class="rule-card">
+      <div class="rule-icon green">✓</div>
+      <div class="rule-text"><strong>STRICT</strong> — Function returns NULL if any input is NULL. Safer, faster.</div>
+    </div>
+    <div class="rule-card">
+      <div class="rule-icon green">✓</div>
+      <div class="rule-text"><strong>PARALLEL SAFE</strong> — PostgreSQL can run this in parallel queries. No hidden state.</div>
+    </div>
+  </div>
+
+  <h3>Step 2: Use pg_trgm for Fuzzy Matching</h3>
+
+  <p>PostgreSQL's `pg_trgm` extension breaks text into 3-character trigrams and does similarity matching. It's not Arabic-specific—it works for any language.</p>
+
+  <p>Enable it:</p>
+
+  <pre><code><span class="kw">CREATE EXTENSION IF NOT EXISTS</span> pg_trgm;</code></pre>
+
+  <p>Then create a functional index on normalized columns:</p>
+
+  <pre><code><span class="kw">CREATE INDEX</span> idx_search_normalized_trgm
+  <span class="kw">ON</span> your_table
+  <span class="kw">USING</span> gin (normalize_arabic(search_column) public.gin_trgm_ops);</code></pre>
+
+  <p>Now queries using the `<%` operator will use the index:</p>
+
+  <pre><code><span class="kw">SELECT</span> * <span class="kw">FROM</span> your_table
+<span class="kw">WHERE</span> normalize_arabic(search_column) <span class="op"><%</span> normalize_arabic(<span class="str">'اجمالي'</span>);</code></pre>
+
+  <p><strong>The trigram approach:</strong> When you search for "اجمالي", PostgreSQL breaks it into trigrams: ["اجم", "جما", "ما", "الي"]. Then it finds all rows whose normalized content shares significant trigram overlap. It's forgiving of typos and close matches.</p>
+
+  <div class="section-marker">
+    <div class="section-marker-line"></div>
+    <div class="section-marker-label">The Trap</div>
+    <div class="section-marker-line"></div>
+  </div>
+
+  <h2>⚠️ The Multi-Schema Operator Hell</h2>
+
+  <p>If you run a single public schema, the above works fine. But if you operate on a custom schema (which many production systems do), you hit a wall.</p>
+
+  <h3>The Problem: Operator Not Found</h3>
+
+  <p>Say your tables live in a custom schema (not public). You create the `normalize_arabic` function there. But `pg_trgm` is installed in the <code>public</code> schema.</p>
+
+  <p>When you run this:</p>
+
+  <pre><code><span class="kw">SELECT</span> * <span class="kw">FROM</span> your_table
+<span class="kw">WHERE</span> normalize_arabic(col) <span class="op"><%</span> <span class="str">'search_term'</span>;</code></pre>
+
+  <p>PostgreSQL throws:</p>
+
+  <pre><code>operator does not exist: text <span class="op"><%</span> text</code></pre>
+
+  <p>Why? Because the `<%` operator lives in the `public` schema, and PostgreSQL isn't searching there by default.</p>
+
+  <h3>The Fix: Explicit Operator Qualification</h3>
+
+  <p>In your application code (Python, Go, whatever), use the <code>op()</code> method to explicitly specify the operator with its schema:</p>
+
+  <pre><code><span class="cm"># Using SQLAlchemy (Python example)</span>
+normalized_col = func.normalize_arabic(YourTable.search_column)
+normalized_query = normalize_arabic_in_app(<span class="str">'اجمالي'</span>)
+
+<span class="cm"># THE FIX: Explicitly call the operator from the public schema</span>
+query = query.where(
+    literal(normalized_query).op(<span class="str">"OPERATOR(public.<%)"</span>)(normalized_col)
+)</code></pre>
+
+  <p>Breaking it down:</p>
+
+  <div class="rules-grid">
+    <div class="rule-card">
+      <div class="rule-icon red">1</div>
+      <div class="rule-text"><strong><code>literal(normalized_query)</code></strong> — Wrap the query string as a literal value</div>
+    </div>
+    <div class="rule-card">
+      <div class="rule-icon red">2</div>
+      <div class="rule-text"><strong><code>.op("OPERATOR(public.<%)")</code></strong> — Use the <code><%</code> operator from the public schema</div>
+    </div>
+    <div class="rule-card">
+      <div class="rule-icon red">3</div>
+      <div class="rule-text"><strong><code>(normalized_col)</code></strong> — Apply it to the normalized column</div>
+    </div>
+  </div>
+
+  <div class="callout success">
+    <p><strong>Why this works:</strong> You're telling PostgreSQL exactly where to find the operator. No ambiguity. No search path guessing. It works.</p>
+  </div>
+
+  <h3>The Root Cause</h3>
+
+  <p>This happens because:</p>
+
+  <ul>
+    <li><code>pg_trgm</code> is a system extension installed in the public schema</li>
+    <li>Your code runs in a custom schema (for isolation, multi-tenancy, whatever)</li>
+    <li>When PostgreSQL looks for the `<%` operator, it searches your schema first, doesn't find it, and fails</li>
+    <li>The search_path setting sometimes helps, but it's unreliable across different connection contexts</li>
+  </ul>
+
+  <p>Explicit qualification sidesteps the entire problem.</p>
+
+  <div class="section-marker">
+    <div class="section-marker-line"></div>
+    <div class="section-marker-label">Implementation</div>
+    <div class="section-marker-line"></div>
+  </div>
+
+  <h2>🔗 Building the Complete Solution</h2>
+
+  <h3>Part 1: Python Normalizer (Application Side)</h3>
+
+  <p>Create a pure function in your app that mirrors the SQL function:</p>
+
+  <pre><code><span class="kw">class</span> <span class="fn">ArabicTextNormalizer</span>:
+    <span class="str">"""Mirrors normalize_arabic() SQL function"""</span>
+    
+    _TASHKEEL = re.compile(r<span class="str">"[ً-ٟـ]"</span>)
+    _HAMZA_ALEF = re.compile(r<span class="str">"[أإآٱ]"</span>)
+    _TEH_MARBUTA = re.compile(r<span class="str">"ة"</span>)
+    _ALEF_MAQSURA = re.compile(r<span class="str">"ى"</span>)
+    
+    <span class="kw">def</span> <span class="fn">normalize</span>(<span class="kw">self</span>, text: <span class="fn">str</span>) → <span class="fn">str</span>:
+        text = text.lower()
+        text = self._TASHKEEL.sub(<span class="str">""</span>, text)
+        text = self._HAMZA_ALEF.sub(<span class="str">"ا"</span>, text)
+        text = self._TEH_MARBUTA.sub(<span class="str">"ه"</span>, text)
+        text = self._ALEF_MAQSURA.sub(<span class="str">"ي"</span>, text)
+        <span class="kw">return</span> text</code></pre>
+
+  <p><strong>Design principle:</strong> No magic. No side effects. You pass in text, you get normalized text. It's testable and deterministic.</p>
+
+  <h3>Part 2: SQL Function (Database Side)</h3>
+
+  <p>The function we showed earlier. Keep it in sync with the Python version—same transformations, same order.</p>
+
+  <h3>Part 3: Functional Index</h3>
+
+  <p>Index the normalized column using trigrams. Create separate indexes if you have multiple search columns or locales:</p>
+
+  <pre><code><span class="kw">CREATE INDEX</span> idx_search_normalized_ar_trgm
+  <span class="kw">ON</span> your_table
+  <span class="kw">USING</span> gin (normalize_arabic(search_column) public.gin_trgm_ops)
+  <span class="kw">WHERE</span> is_deleted = <span class="fn">false</span>;  <span class="cm">-- Ignore soft-deleted rows</span></code></pre>
+
+  <h3>Part 4: Query Builder (The Multi-Schema Fix)</h3>
+
+  <pre><code><span class="kw">class</span> <span class="fn">ArabicSearchFilter</span>:
+    <span class="kw">def</span> <span class="fn">build_query</span>(<span class="kw">self</span>, search_term: <span class="fn">str</span>):
+        <span class="cm"># Step 1: Normalize the search term in Python</span>
+        normalized = self.normalizer.normalize(search_term)
+        
+        <span class="cm"># Step 2: Build SQL with explicit operator qualification</span>
+        column = YourTable.search_column
+        normalized_col = func.normalize_arabic(column)
+        
+        <span class="cm"># Step 3: Use explicit operator path for multi-schema safety</span>
+        filter_clause = literal(normalized).op(
+            <span class="str">"OPERATOR(public.<%)"</span>
+        )(normalized_col)
+        
+        <span class="kw">return</span> session.query(YourTable).filter(filter_clause)</code></pre>
+
+  <p>This approach:</p>
+
+  <ul>
+    <li>✓ Normalizes the query string in Python (for consistency)</li>
+    <li>✓ Normalizes the database column in SQL (for index usage)</li>
+    <li>✓ Uses the explicit operator path (works across any schema)</li>
+    <li>✓ Triggers the functional index (fast, even on millions of rows)</li>
+  </ul>
+
+  <div class="section-marker">
+    <div class="section-marker-line"></div>
+    <div class="section-marker-label">Testing</div>
+    <div class="section-marker-line"></div>
+  </div>
+
+  <h2>🧪 Verification That It Works</h2>
+
+  <p>You need to test both sides:</p>
+
+  <h3>Unit Tests (Python Normalizer)</h3>
+
+  <pre><code><span class="kw">def</span> <span class="fn">test_normalize_arabic</span>():
+    normalizer = ArabicTextNormalizer()
+    
+    <span class="cm"># Diacritics removed</span>
+    <span class="fn">assert</span> normalizer.normalize(<span class="str">"إجمالي"</span>) == <span class="str">"اجمالي"</span>
+    
+    <span class="cm"># Hamza variants normalized</span>
+    <span class="fn">assert</span> normalizer.normalize(<span class="str">"أيرادات"</span>) == normalizer.normalize(<span class="str">"إيرادات"</span>)
+    
+    <span class="cm"># Character equivalents</span>
+    <span class="fn">assert</span> normalizer.normalize(<span class="str">"مدينة"</span>) == normalizer.normalize(<span class="str">"مدينه"</span>)</code></pre>
+
+  <h3>Integration Tests (Database)</h3>
+
+  <pre><code><span class="kw">async def</span> <span class="fn">test_fuzzy_search_arabic</span>(db):
+    <span class="cm"># Insert test data with various forms</span>
+    <span class="kw">await</span> db.insert({<span class="str">'content'</span>: <span class="str">'إجمالي المبيعات'</span>})
+    <span class="kw">await</span> db.insert({<span class="str">'content'</span>: <span class="str">'أجمالي العملاء'</span>})
+    
+    <span class="cm"># Search with the naked form (what users type)</span>
+    results = <span class="kw">await</span> search(<span class="str">'اجمالي'</span>)
+    
+    <span class="cm"># Both rows should match</span>
+    <span class="fn">assert</span> len(results) == 2</code></pre>
+
+  <p><strong>Why both tests matter:</strong> Unit tests catch normalizer bugs. Integration tests catch SQL setup issues. Together, they prove the entire pipeline works.</p>
+
+  <div class="section-marker">
+    <div class="section-marker-line"></div>
+    <div class="section-marker-label">Lessons</div>
+    <div class="section-marker-line"></div>
+  </div>
+
+  <h2>🎯 Key Takeaways</h2>
+
+  <h3>1. Normalization Is Linguistic, Not Technical</h3>
+
+  <p>Most developers approach this backwards. They ask "how do I do fuzzy search in PostgreSQL?" The real question is "what does Arabic linguistic normalization look like?" Once you understand the linguistics (diacritics, Hamza variants, character equivalents), the technical solution follows naturally.</p>
+
+  <h3>2. Multi-Schema Requires Explicit Operator Paths</h3>
+
+  <p>If you're building systems with schema isolation (for multi-tenancy, security, whatever), never trust PostgreSQL to find operators across schemas. Use <code>op("OPERATOR(public.<%)")</code>. It's verbose but reliable.</p>
+
+  <h3>3. Functional Indexes Are Your Secret Weapon</h3>
+
+  <p>Most developers don't know about functional indexes. They index raw columns. But you can index the <em>result</em> of a function—in this case, normalized text. This is what makes the entire system fast.</p>
+
+  <h3>4. Keep Python and SQL in Sync</h3>
+
+  <p>The moment you have normalization logic in two places, you have a synchronization problem. Document the relationship. Write tests that verify both sides produce identical output. If they drift, searches break silently.</p>
+
+  <h3>5. Don't Introduce Elasticsearch If PostgreSQL Can Do It</h3>
+
+  <p>Elasticsearch is powerful. It's also another service. Another database. Another failure point. If PostgreSQL solves your problem—and for Arabic fuzzy search, it does—stick with PostgreSQL. Simpler systems are more reliable systems.</p>
+
+  <div class="closing-box">
+    <p>Building fuzzy Arabic search in PostgreSQL isn't magic. It's understanding the problem space (Arabic linguistics), knowing your database (normalization functions + trigram indexes + explicit operator paths), and not reaching for external services unnecessarily.</p>
+    <p style="color: var(--color-text-primary); font-weight: 500; margin-top: 0.75rem;">Your users type what they want to find. They don't care about diacritics or Hamza variants. Make it work for them. PostgreSQL can. You just have to know how.</p>
+    <p style="color: var(--color-text-primary); font-weight: 500; margin-top: 0.75rem;">The OPERATOR(public.<%)) pattern is your friend when things break at 2 AM. Remember it. 👇</p>
+  </div>
 </div>
 
 
@@ -577,13 +915,13 @@
         <div class="share-bar">
             <span class="share-label">Share this post</span>
             <a class="share-btn share-btn-linkedin"
-               href="https://www.linkedin.com/sharing/share-offsite/?url=http%3A%2F%2Flocalhost%3A1313%2Fposts%2Fdeath-stranding-grief%2F"
+               href="https://www.linkedin.com/sharing/share-offsite/?url=http%3A%2F%2Flocalhost%3A1313%2Fposts%2Ffuzzy-arabic-search%2F"
                target="_blank" rel="noopener">
                <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
                LinkedIn
             </a>
             <a class="share-btn" style="background:rgba(29,161,242,0.1);border:1px solid rgba(29,161,242,0.4);color:#60b4f7;"
-               href="https://twitter.com/intent/tweet?url=http%3A%2F%2Flocalhost%3A1313%2Fposts%2Fdeath-stranding-grief%2F&text=I&#43;Lost&#43;My&#43;Mother.&#43;A&#43;Video&#43;Game&#43;Helped&#43;Me&#43;Carry&#43;the&#43;Weight.&via=youssef_jad"
+               href="https://twitter.com/intent/tweet?url=http%3A%2F%2Flocalhost%3A1313%2Fposts%2Ffuzzy-arabic-search%2F&text=Fuzzy&#43;Arabic&#43;Search&#43;Without&#43;Elasticsearch%3A&#43;Solving&#43;%D8%A7%D9%84%D8%AA%D8%B4%D9%83%D9%8A%D9%84%2C&#43;%D8%A7%D9%84%D8%A3%D9%84%D9%81%2C&#43;and&#43;%D8%A7%D9%84%D9%85%D8%AF&#43;in&#43;PostgreSQL&via=youssef_jad"
                target="_blank" rel="noopener">
                <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.744l7.737-8.835L1.254 2.25H8.08l4.253 5.622zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
                Twitter / X
@@ -616,14 +954,13 @@
         </div>
 
         
-        
         <div class="comments-section">
             <p class="comments-title">Discussion</p>
             <script src="https://giscus.app/client.js"
                 data-repo="youssef-jad/youssef-jad.github.io"
-                data-repo-id="REPLACE_WITH_REPO_ID"
+                data-repo-id="R_kgDOSR8kKg"
                 data-category="General"
-                data-category-id="REPLACE_WITH_CATEGORY_ID"
+                data-category-id="DIC_kwDOSR8kKs4C8vvT"
                 data-mapping="pathname"
                 data-strict="0"
                 data-reactions-enabled="1"
